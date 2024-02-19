@@ -43,23 +43,22 @@ class MainActivity : ComponentActivity() {
         val peopleService = RetrofitInstance
             .getRetrofitInstace()
             .create(PeopleService::class.java)
-
         val responsePlanetData: LiveData<Response<Planet>> =
             liveData {
                 val response = planetService.getPlanets()
-                Log.e("aaaaaaaaaaaaaaaaaaaaaaa", "Planet Service response: ${response.body()?.results}")
+                Log.i("StarWars_InfoTag", "Planet Service response: ${response.body()?.results}")
                 emit(response)
             }
         val responseFilmData: LiveData<Response<Film>> =
             liveData {
                 val response = filmService.getFilms()
-                Log.e("aaaaaaaaaaaaaaaaaaaaaaa", "Film Service response: ${response.body()?.results}")
+                Log.i("StarWars_InfoTag", "Film Service response: ${response.body()?.results}")
                 emit(response)
             }
         val responsePeopleData: LiveData<Response<People>> =
             liveData {
                 val response = peopleService.getPeople()
-                Log.e("aaaaaaaaaaaaaaaaaaaaaaa", "People Service response: ${response.body()?.results}")
+                Log.i("StarWars_InfoTag", "People Service response: ${response.body()?.results}")
                 emit(response)
             }
 
@@ -67,7 +66,7 @@ class MainActivity : ComponentActivity() {
         fun MainScreen(navController: NavController) {
             val items = listOf("People", "Films", "Planets")
 
-            LazyColumn {
+            LazyColumn() {
                 items(items.size) { index ->
                     Text(
                         text = items[index],
